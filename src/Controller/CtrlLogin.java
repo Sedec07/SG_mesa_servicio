@@ -13,6 +13,7 @@ public class CtrlLogin {
     public CtrlLogin() {
         this.usuarioDAO = new UsuarioDAO();
     }
+    
 
     /**
      * Autentica al usuario y guarda la sesión si las credenciales son válidas.

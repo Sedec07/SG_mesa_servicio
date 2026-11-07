@@ -12,6 +12,7 @@ public class CtrlUsuario {
     private final UsuarioDAO usuarioDAO;
 
     public CtrlUsuario() {
+        
         this.usuarioDAO = new UsuarioDAO();
     }
 

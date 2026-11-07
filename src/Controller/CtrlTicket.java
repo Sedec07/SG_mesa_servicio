@@ -13,6 +13,7 @@ import model.Usuario;
  */
 public class CtrlTicket {
 
+    
     private final TicketDAO ticketDAO;
     private final UsuarioDAO usuarioDAO;
     private final HistorialTicketDAO historialDAO;
