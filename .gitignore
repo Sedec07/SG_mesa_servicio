@@ -1,0 +1,11 @@
+# Compilación Java
+/build/
+/dist/
+*.class
+
+# Archivos privados de NetBeans
+/nbproject/private/
+/nbproject/workspace.xml
+
+# Logs
+*.log
