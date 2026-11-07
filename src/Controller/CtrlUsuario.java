@@ -44,4 +44,5 @@ public class CtrlUsuario {
         }
         return usuarioDAO.inactivar(idUsuario);
     }
+    
 }

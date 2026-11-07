@@ -12,7 +12,6 @@ import model.Usuario;
  * @author Melqui Erazo
  */
 public class CtrlTicket {
-
     
     private final TicketDAO ticketDAO;
     private final UsuarioDAO usuarioDAO;

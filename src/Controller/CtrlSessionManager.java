@@ -12,7 +12,6 @@ public class CtrlSessionManager {
     private Usuario usuarioAutenticado;
 
     private CtrlSessionManager() {}
-
     
     public static CtrlSessionManager getInstance() {
         if (instance == null) {

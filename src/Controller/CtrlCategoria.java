@@ -11,7 +11,6 @@ public class CtrlCategoria {
 
     private final CategoriaDAO categoriaDAO;
 
-    
     public CtrlCategoria() {
         this.categoriaDAO = new CategoriaDAO();
     }
