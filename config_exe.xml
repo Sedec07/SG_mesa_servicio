@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\Melqui Erazo\Documents\USC\semestre 6\Admin SI\Mesa_Servicio\dist\Mesa_Servicio.jar</jar>
+  <outfile>C:\Users\Melqui Erazo\Documents\USC\semestre 6\Admin SI\Mesa_Servicio\dist\Mesa_servicioTi.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon></icon>
+  <classPath>
+    <mainClass>mesa_servicio.Mesa_Servicio</mainClass>
+    <cp>lib/mysql-connector-java-5.1.13-bin.jar</cp>
+    <cp>lib/flatlaf-3.5.4.jar</cp>
+  </classPath>
+  <jre>
+    <path>%JAVA_HOME%;%PATH%</path>
+    <requiresJdk>false</requiresJdk>
+    <requires64Bit>false</requires64Bit>
+    <minVersion>1.8.0</minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+</launch4jConfig>

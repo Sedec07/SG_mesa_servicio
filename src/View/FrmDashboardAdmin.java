@@ -1,8 +1,8 @@
 package View;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import controller.CtrlCategoria;
-import controller.CtrlSessionManager;
+import Controller.CtrlCategoria;
+import Controller.CtrlSessionManager;
 import Controller.CtrlTicket;
 import java.awt.*;
 import java.util.ArrayList;

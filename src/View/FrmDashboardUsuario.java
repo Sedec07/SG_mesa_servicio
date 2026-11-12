@@ -2,7 +2,7 @@ package View;
 
 import Controller.CtrlTicket;
 import com.formdev.flatlaf.FlatClientProperties;
-import controller.CtrlSessionManager;
+import Controller.CtrlSessionManager;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

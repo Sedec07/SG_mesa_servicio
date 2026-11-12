@@ -2,8 +2,8 @@ package View;
 
 import Controller.CtrlTicket;
 import com.formdev.flatlaf.FlatClientProperties;
-import controller.CtrlCategoria;
-import controller.CtrlSessionManager;
+import Controller.CtrlCategoria;
+import Controller.CtrlSessionManager;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;

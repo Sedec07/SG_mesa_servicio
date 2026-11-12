@@ -1,7 +1,7 @@
 package View;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import controller.CtrlLogin;
+import Controller.CtrlLogin;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import DAO.CategoriaDAO;
 import java.util.List;
