@@ -291,7 +291,7 @@ public class FrmTecnicoTickets extends JFrame {
                 t.getNombreCategoria(),
                 t.getPrioridad(),
                 estado,
-                t.getFechaCreacion() != null ? t.getFechaCreacion().toString().substring(0, 16) : ""
+                t.getFechaCreacion() != null ? t.getFechaCreacion().toString().substring(0, 10) : ""
             });
         }
         lblContadorPendientes.setText(String.valueOf(pendientes));

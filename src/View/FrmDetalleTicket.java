@@ -13,21 +13,20 @@ public class FrmDetalleTicket extends JDialog {
     private final String codigoTicket;
     private final CtrlTicket ctrlTicket;
 
+    private JLabel lblCodigoGeneral;
     private JLabel lblSolicitante;
     private JLabel lblPrioridad;
+    private JLabel lblEstado;
     private JLabel lblFechaCreacion;
-    private JLabel lblCodigoGeneral;
 
     private JLabel lblTecnico;
     private JLabel lblCategoria;
 
     private JLabel lblTituloDetalle;
-    private JLabel lblPrioridadDetalle;
-    private JLabel lblFechaDetalle;
-    private JLabel lblCodigoDetalle;
+    private JTextArea txtDescripcion;
 
     private JPanel panelHistorialLista;
-    private JTextArea txtComentario;
+    private JTextArea txtUltimoComentario;
 
     public FrmDetalleTicket(Frame parent, String codigoTicket) {
         super(parent, "Mesa de Servicio TI — Detalle del Ticket", true);
@@ -67,40 +66,61 @@ public class FrmDetalleTicket extends JDialog {
         panelHeader.add(lblTituloHeader, BorderLayout.WEST);
         panelHeader.add(btnCerrar, BorderLayout.EAST);
 
-        // Grilla Principal de 5 Tarjetas Redondeadas
+        // Grilla Principal de Tarjetas Redondeadas
         JPanel panelGrid = new JPanel(new GridLayout(2, 3, 15, 15));
         panelGrid.setOpaque(false);
 
-        // 1. Tarjeta Información General
-        JPanel cardInfo = crearTarjeta("Informacion General");
+        // 1. Tarjeta Información General (Sin repeticiones)
+        JPanel cardInfo = crearTarjeta("Información General");
+        lblCodigoGeneral = crearLabelDato("Código Ticket: " + codigoTicket);
         lblSolicitante = crearLabelDato("Solicitante: -");
         lblPrioridad = crearLabelDato("Prioridad: -");
-        lblFechaCreacion = crearLabelDato("Fecha Creacion: -");
-        lblCodigoGeneral = crearLabelDato("Codigo Ticket: " + codigoTicket);
-        cardInfo.add(lblSolicitante);
-        cardInfo.add(lblPrioridad);
-        cardInfo.add(lblFechaCreacion);
+        lblEstado = crearLabelDato("Estado: -");
+        lblFechaCreacion = crearLabelDato("Fecha Creación: -");
         cardInfo.add(lblCodigoGeneral);
+        cardInfo.add(Box.createRigidArea(new Dimension(0, 4)));
+        cardInfo.add(lblSolicitante);
+        cardInfo.add(Box.createRigidArea(new Dimension(0, 4)));
+        cardInfo.add(lblPrioridad);
+        cardInfo.add(Box.createRigidArea(new Dimension(0, 4)));
+        cardInfo.add(lblEstado);
+        cardInfo.add(Box.createRigidArea(new Dimension(0, 4)));
+        cardInfo.add(lblFechaCreacion);
 
         // 2. Tarjeta Asignación
-        JPanel cardAsig = crearTarjeta("Asignacion");
-        lblTecnico = crearLabelDato("Tecnico: Sin Asignar");
-        lblCategoria = crearLabelDato("Categoria: -");
+        JPanel cardAsig = crearTarjeta("Asignación");
+        lblTecnico = crearLabelDato("Técnico: Sin Asignar");
+        lblCategoria = crearLabelDato("Categoría: -");
         cardAsig.add(lblTecnico);
+        cardAsig.add(Box.createRigidArea(new Dimension(0, 6)));
         cardAsig.add(lblCategoria);
 
-        // 3. Tarjeta Detalles Adicionales
-        JPanel cardDetalles = crearTarjeta("Detalles Adicionales");
-        lblTituloDetalle = crearLabelDato("Titulo: -");
-        lblPrioridadDetalle = crearLabelDato("Prioridad: -");
-        lblFechaDetalle = crearLabelDato("Fecha Creacion: -");
-        lblCodigoDetalle = crearLabelDato("Codigo Ticket: " + codigoTicket);
-        cardDetalles.add(lblTituloDetalle);
-        cardDetalles.add(lblPrioridadDetalle);
-        cardDetalles.add(lblFechaDetalle);
-        cardDetalles.add(lblCodigoDetalle);
+        // 3. Tarjeta Detalles del Incidente (Título + Descripción)
+        JPanel cardDetalles = crearTarjeta("Detalles del Ticket");
+        lblTituloDetalle = new JLabel("Título: -");
+        lblTituloDetalle.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        lblTituloDetalle.setForeground(Color.WHITE);
+        lblTituloDetalle.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        // 4. Tarjeta Registro de Actividad
+        txtDescripcion = new JTextArea();
+        txtDescripcion.setWrapStyleWord(true);
+        txtDescripcion.setLineWrap(true);
+        txtDescripcion.setEditable(false);
+        txtDescripcion.setFocusable(false);
+        txtDescripcion.setBackground(Color.decode("#3B4252"));
+        txtDescripcion.setForeground(Color.decode("#E5E9F0"));
+        txtDescripcion.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        txtDescripcion.setMargin(new Insets(8, 8, 8, 8));
+
+        JScrollPane scrollDesc = new JScrollPane(txtDescripcion);
+        scrollDesc.setBorder(null);
+        scrollDesc.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        cardDetalles.add(lblTituloDetalle);
+        cardDetalles.add(Box.createRigidArea(new Dimension(0, 8)));
+        cardDetalles.add(scrollDesc);
+
+        // 4. Tarjeta Registro de Actividad (Bitácora)
         JPanel cardRegistro = crearTarjeta("Registro de Actividad");
         panelHistorialLista = new JPanel();
         panelHistorialLista.setLayout(new BoxLayout(panelHistorialLista, BoxLayout.Y_AXIS));
@@ -112,21 +132,19 @@ public class FrmDetalleTicket extends JDialog {
         scrollHistorial.setBorder(null);
         cardRegistro.add(scrollHistorial);
 
-        // 5. Tarjeta Comentarios con cuadro redondeado
-        JPanel cardComentarios = crearTarjeta("Comentario");
-        txtComentario = new JTextArea();
-        txtComentario.setWrapStyleWord(true);
-        txtComentario.setLineWrap(true);
-        txtComentario.setEditable(false);
-        txtComentario.setFocusable(false);
-        txtComentario.setBackground(Color.decode("#3B4252"));
-        txtComentario.setForeground(Color.WHITE);
-        txtComentario.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        txtComentario.putClientProperty(FlatClientProperties.STYLE, "arc: 12; margin: 8,8,8,8");
+        // 5. Tarjeta Última Resolución / Comentario Técnico
+        JPanel cardComentarios = crearTarjeta("Última Actualización");
+        txtUltimoComentario = new JTextArea("Sin observaciones registradas.");
+        txtUltimoComentario.setWrapStyleWord(true);
+        txtUltimoComentario.setLineWrap(true);
+        txtUltimoComentario.setEditable(false);
+        txtUltimoComentario.setFocusable(false);
+        txtUltimoComentario.setBackground(Color.decode("#3B4252"));
+        txtUltimoComentario.setForeground(Color.WHITE);
+        txtUltimoComentario.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        txtUltimoComentario.setMargin(new Insets(8, 8, 8, 8));
 
-        JScrollPane scrollComentario = new JScrollPane(txtComentario);
-        scrollComentario.setOpaque(false);
-        scrollComentario.getViewport().setOpaque(false);
+        JScrollPane scrollComentario = new JScrollPane(txtUltimoComentario);
         scrollComentario.setBorder(null);
         cardComentarios.add(scrollComentario);
 
@@ -143,7 +161,6 @@ public class FrmDetalleTicket extends JDialog {
     }
 
     private JPanel crearTarjeta(String titulo) {
-        // Panel personalizado con esquinas redondeadas
         JPanel card = new PanelRedondeado(18, Color.decode("#4C566A"));
         card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
         card.setBorder(BorderFactory.createEmptyBorder(14, 16, 14, 16));
@@ -172,22 +189,20 @@ public class FrmDetalleTicket extends JDialog {
         Ticket ticket = ctrlTicket.obtenerPorCodigo(codigoTicket);
 
         if (ticket != null) {
+            lblCodigoGeneral.setText("Código Ticket: " + (ticket.getCodigoUnico() != null ? ticket.getCodigoUnico() : codigoTicket));
             lblSolicitante.setText("Solicitante: " + (ticket.getNombreSolicitante() != null ? ticket.getNombreSolicitante() : "N/A"));
             lblPrioridad.setText("Prioridad: " + ticket.getPrioridad());
-            lblFechaCreacion.setText("Fecha Creacion: " + (ticket.getFechaCreacion() != null ? ticket.getFechaCreacion().toString().substring(0, 10) : "N/A"));
-            lblCodigoGeneral.setText("Codigo Ticket: " + (ticket.getCodigoUnico() != null ? ticket.getCodigoUnico() : codigoTicket));
+            lblEstado.setText("Estado: " + (ticket.getNombreEstado() != null ? ticket.getNombreEstado() : "N/A"));
+            lblFechaCreacion.setText("Fecha Creación: " + (ticket.getFechaCreacion() != null ? ticket.getFechaCreacion().toString().substring(0, 10) : "N/A"));
 
-            lblTecnico.setText("Tecnico: " + (ticket.getNombreTecnico() != null ? ticket.getNombreTecnico() : "Sin Asignar"));
-            lblCategoria.setText("Categoria: " + (ticket.getNombreCategoria() != null ? ticket.getNombreCategoria() : "N/A"));
+            lblTecnico.setText("Técnico: " + (ticket.getNombreTecnico() != null ? ticket.getNombreTecnico() : "Sin Asignar"));
+            lblCategoria.setText("Categoría: " + (ticket.getNombreCategoria() != null ? ticket.getNombreCategoria() : "N/A"));
 
-            lblTituloDetalle.setText("Titulo: " + ticket.getTitulo());
-            lblPrioridadDetalle.setText("Prioridad: " + ticket.getPrioridad());
-            lblFechaDetalle.setText("Fecha Creacion: " + (ticket.getFechaCreacion() != null ? ticket.getFechaCreacion().toString().substring(0, 10) : "N/A"));
-            lblCodigoDetalle.setText("Codigo Ticket: " + (ticket.getCodigoUnico() != null ? ticket.getCodigoUnico() : codigoTicket));
+            lblTituloDetalle.setText("Título: " + (ticket.getTitulo() != null ? ticket.getTitulo() : "Sin título"));
+            txtDescripcion.setText(ticket.getDescripcion() != null ? ticket.getDescripcion() : "Sin descripción detallada.");
+            txtDescripcion.setCaretPosition(0);
 
-            txtComentario.setText(ticket.getDescripcion());
-
-            // Cargar historial con el ID numérico
+            // Cargar historial
             List<HistorialTicket> historial = ctrlTicket.obtenerHistorial(ticket.getIdTicket());
             panelHistorialLista.removeAll();
 
@@ -195,11 +210,12 @@ public class FrmDetalleTicket extends JDialog {
                 panelHistorialLista.add(crearLabelDato("Solicitud Recibida (Automatizado)"));
             } else {
                 for (HistorialTicket h : historial) {
-                    JLabel lblAccion = new JLabel(h.getComentario());
+                    JLabel lblAccion = new JLabel("• " + h.getComentario());
                     lblAccion.setFont(new Font("Segoe UI", Font.BOLD, 12));
                     lblAccion.setForeground(Color.WHITE);
 
-                    JLabel lblFecha = new JLabel(h.getFechaCambio() != null ? h.getFechaCambio().toString() : "");
+                    String fechaStr = h.getFechaCambio() != null ? h.getFechaCambio().toString().substring(0, 10) : "";
+                    JLabel lblFecha = new JLabel("   " + fechaStr);
                     lblFecha.setFont(new Font("Segoe UI", Font.PLAIN, 11));
                     lblFecha.setForeground(Color.decode("#D8DEE9"));
 
@@ -207,13 +223,15 @@ public class FrmDetalleTicket extends JDialog {
                     panelHistorialLista.add(lblFecha);
                     panelHistorialLista.add(Box.createRigidArea(new Dimension(0, 6)));
                 }
+                // Mostrar el último comentario registrado en la tarjeta de Última Actualización
+                HistorialTicket ultimo = historial.get(historial.size() - 1);
+                txtUltimoComentario.setText(ultimo.getComentario());
             }
             panelHistorialLista.revalidate();
             panelHistorialLista.repaint();
         }
     }
 
-    // --- Componente de Panel con Esquinas Redondeadas Smooth ---
     private static class PanelRedondeado extends JPanel {
         private final int radio;
         private final Color colorFondo;
