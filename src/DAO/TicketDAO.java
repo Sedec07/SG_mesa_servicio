@@ -131,7 +131,7 @@ public class TicketDAO {
                    + "INNER JOIN usuarios u_sol ON t.id_solicitante = u_sol.id_usuario "
                    + "LEFT JOIN usuarios u_tec ON t.id_tecnico_asignado = u_tec.id_usuario "
                    + "INNER JOIN estados_ticket e ON t.id_estado = e.id_estado "
-                   + "WHERE t.id_ticket = ?";
+                   + "WHERE t.codigo_unico = ?";
 
         List<Ticket> lista = ejecutarConsultaLista(sql, idTicket);
         return lista.isEmpty() ? null : lista.get(0);

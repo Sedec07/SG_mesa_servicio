@@ -14,6 +14,7 @@ public class HistorialTicket {
     private Integer idEstadoAnterior; // Integer objeto para permitir NULL (en creación inicial)
     private Integer idEstadoNuevo;    // Integer objeto para permitir NULL (en comentarios simples)
     private Timestamp fechaRegistro;
+    private Timestamp fechaCambio;
 
     // Atributos auxiliares para presentar información detallada en vistas/tablas
     private String codigoTicket;
@@ -138,5 +139,12 @@ public class HistorialTicket {
 
     public void setNombreEstadoNuevo(String nombreEstadoNuevo) {
         this.nombreEstadoNuevo = nombreEstadoNuevo;
+    }
+    public Timestamp getFechaCambio() {
+        return fechaCambio;
+    }
+
+    public void setFechaCambio(Timestamp fechaCambio) {
+        this.fechaCambio = fechaCambio;
     }
 }

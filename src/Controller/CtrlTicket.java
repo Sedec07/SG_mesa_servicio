@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import DAO.HistorialTicketDAO;
 import DAO.TicketDAO;
@@ -98,6 +98,19 @@ public class CtrlTicket {
         return actualizado;
     }
 
+    public Ticket obtenerPorCodigo(String codigoTicket) {
+    try {
+        int id = Integer.parseInt(codigoTicket.replace("TCK-", "").trim());
+        return ticketDAO.buscarPorId(id);
+    } catch (NumberFormatException e) {
+        System.err.println("Error al parsear el código del ticket: " + e.getMessage());
+        return null;
+        }
+    }
+    public boolean reasignarTecnico(int idTicket, int idNuevoTecnico) {
+    if (idTicket <= 0 || idNuevoTecnico <= 0) return false;
+    return ticketDAO.asignarTecnico(idTicket, idNuevoTecnico);
+}
     public List<HistorialTicket> obtenerHistorial(int idTicket) {
         return historialDAO.listarPorTicket(idTicket);
     }
