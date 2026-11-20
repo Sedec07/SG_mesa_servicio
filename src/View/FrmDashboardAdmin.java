@@ -273,7 +273,7 @@ public class FrmDashboardAdmin extends JFrame {
                 t.getNombreTecnico() != null ? t.getNombreTecnico() : "Sin Asignar",
                 t.getPrioridad(),
                 t.getNombreEstado(),
-                t.getFechaCreacion() != null ? t.getFechaCreacion().toString().substring(0, 10) : ""
+                t.getFechaCreacion() != null ? t.getFechaCreacion().toString().substring(0, 16) : ""
             });
         }
 

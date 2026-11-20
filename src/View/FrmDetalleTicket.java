@@ -193,7 +193,7 @@ public class FrmDetalleTicket extends JDialog {
             lblSolicitante.setText("Solicitante: " + (ticket.getNombreSolicitante() != null ? ticket.getNombreSolicitante() : "N/A"));
             lblPrioridad.setText("Prioridad: " + ticket.getPrioridad());
             lblEstado.setText("Estado: " + (ticket.getNombreEstado() != null ? ticket.getNombreEstado() : "N/A"));
-            lblFechaCreacion.setText("Fecha Creación: " + (ticket.getFechaCreacion() != null ? ticket.getFechaCreacion().toString().substring(0, 10) : "N/A"));
+            lblFechaCreacion.setText("Fecha Creación: " + (ticket.getFechaCreacion() != null ? ticket.getFechaCreacion().toString().substring(0, 16) : "N/A"));
 
             lblTecnico.setText("Técnico: " + (ticket.getNombreTecnico() != null ? ticket.getNombreTecnico() : "Sin Asignar"));
             lblCategoria.setText("Categoría: " + (ticket.getNombreCategoria() != null ? ticket.getNombreCategoria() : "N/A"));

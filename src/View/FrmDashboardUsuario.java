@@ -136,7 +136,7 @@ public class FrmDashboardUsuario extends JFrame {
                 t.getNombreCategoria(),
                 t.getPrioridad(),
                 t.getNombreEstado(),
-                t.getFechaCreacion() != null ? t.getFechaCreacion().toString().substring(0, 10) : ""
+                t.getFechaCreacion() != null ? t.getFechaCreacion().toString().substring(0, 16) : ""
             });
         }
     }
